@@ -7,5 +7,9 @@
 
 int _putchar(char);
 int _printf(const char *format, ...);
+int ev_print_func(const char *s, int index);
+unsigned int handl_buf(char *buf, char c, unsigned int abuf);
+int print_buf(char *buf, unsigned int nbuf);
+int (*get_print_func(const char *s, int index))(va_list, char *, unsigned int);
 
 #endif
