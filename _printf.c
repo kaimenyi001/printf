@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #include "main.h"
 
 /**
@@ -50,3 +51,6 @@ int _printf(const char *format, ...)
 	print_buf(bffr, abuf), free(bffr), va_end(argts);
 	return (ln);
 }
+=======
+
+>>>>>>> 1d1cadbcd3db7dcfdd4e3004f1c224957e16502a
