@@ -1,15 +1,15 @@
 #include "main.h"
 
 /**
- * _printf - produces output according to a format
- * @format: character string
- * Return: void
+ * _printf - Printf function
+ * @format: format.
+ * Return: Printed chars.
  */
 int _printf(const char *format, ...)
 {
 	int (*fun)(va_list, char *, unsigned int);
+	unsigned int a = 0, ln = 0, abuf = 0;
 	va_list argts;
-	unsigned int abuf = 0, a = 0, ln = 0;
 	char *bffr;
 
 	va_start(argts, format), bffr = malloc(sizeof(char) * 1024);
@@ -17,9 +17,9 @@ int _printf(const char *format, ...)
 		return (-1);
 	if (!format[a])
 		return (0);
-	for (a = 0; format && format[a]; a++)
+	for (a = 0; format && format[a] != '\0'; a++)
 	{
-		if (format[a] == '%')
+		if (format[i] != '%')
 		{
 			if (format[a + 1] == '\0')
 			{
