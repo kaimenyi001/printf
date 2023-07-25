@@ -36,7 +36,7 @@ int _printf(const char *format, ...)
 					handl_buf(bffr, format[a], abuf), ln++ a--;
 				}
 				else
-				{
+				{	
 					ln += fun(args, bffr, abuf);
 					a += ev_print_func(format, a + 1);
 				}
