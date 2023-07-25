@@ -1,52 +1,50 @@
-#include "main.h"
-
+include "main.h"
 /**
- * _printf - produces output according to a format
- * @format: character string
- * Return: void
+ * _printf - formatted output conversion and print data.
+ * @format: input string.
+ *
+ * Return: number of chars printed.
  */
 int _printf(const char *format, ...)
 {
-	int (*fun)(va_list, char *, unsigned int);
-	va_list argts;
-	unsigned int abuf = 0, a = 0, ln = 0;
-	char *bffr;
+	unsigned int i = 0, len = 0, ibuf = 0;
+	va_list arguments;
+	int (*function)(va_list, char *, unsigned int);
+	char *buffer;
 
-	va_start(argts, format), bffr = malloc(sizeof(char) * 1024);
-	if (!format || !bffr || (format[a] == '%' && !format[a + 1]))
+	va_start(arguments, format), buffer = malloc(sizeof(char) * 1024);
+	if (!format || !buffer || (format[i] == '%' && !format[i + 1]))
 		return (-1);
-	if (!format[a])
+	if (!format[i])
 		return (0);
-	for (a = 0; format && format[a]; a++)
+	for (i = 0; format && format[i]; i++)
 	{
-		if (format[a] == '%')
+		if (format[i] == '%')
 		{
-			if (format[a + 1] == '\0')
-			{
-				print_buf(bffr, abuf), free(bffr), va_end(args);
+			if (format[i + 1] == '\0')
+			{	print_buf(buffer, ibuf), free(buffer), va_end(arguments);
 				return (-1);
 			}
 			else
-			{
-				fun = get_print_func(format, a + 1);
-				if (fun == NULL)
+			{	function = get_print_func(format, i + 1);
+				if (function == NULL)
 				{
-					if (format[a + 1] == ' ' && !format[a + 2])
+					if (format[i + 1] == ' ' && !format[i + 2])
 						return (-1);
-					handl_buf(bffr, format[a], abuf), ln++ a--;
+					handl_buf(buffer, format[i], ibuf), len++, i--;
 				}
 				else
-				{	
-					ln += fun(argts, bffr, abuf);
-					a += ev_print_func(format, a + 1);
+				{
+					len += function(arguments, buffer, ibuf);
+					i += ev_print_func(format, i + 1);
 				}
-			} a++;
+			} i++;
 		}
 		else
-			handl_buf(bffr, format[a], abuf), ln++;
-		for (abuf = ln; abuf > 1024; abuf -= 1024)
+			handl_buf(buffer, format[i], ibuf), len++;
+		for (ibuf = len; ibuf > 1024; ibuf -= 1024)
 			;
 	}
-	print_buf(bffr, abuf), free(bffr), va_end(argts);
-	return (ln);
+	print_buf(buffer, ibuf), free(buffer), va_end(arguments);
+	return (len);
 }

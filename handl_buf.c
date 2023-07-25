@@ -4,17 +4,17 @@
  * handl_buf - concats characters
  * @buf: buffer pointer
  * @c: character to concat
- * @abuf: index of buffer pointer
+ * @ibuf: index of buffer pointer
  * Return: void
  */
-unsigned int handl_buf(char *buf, char c, unsigned int abuf)
+unsigned int handl_buf(char *buf, char c, unsigned int ibuf)
 {
-	if (abuf == 1024)
+	if (ibuf == 1024)
 	{
-		print_buf(buf, abuf);
-		abuf = 0;
+		print_buf(buf, ibuf);
+		ibuf = 0;
 	}
-	buf[abuf] = c;
-	abuf++;
-	return (abuf);
+	buf[ibuf] = c;
+	ibuf++;
+	return (ibuf);
 }
