@@ -3,6 +3,7 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include <unistd.h>
+<<<<<<< HEAD
 
 #define UNUSED(x) (void)(x)
 #define BUFF_SIZE 1024
@@ -17,6 +18,10 @@
 /* SIZES */
 #define S_LONG 2
 #define S_SHORT 1
+=======
+#include <stdlib.h>
+#include <stdio.h>
+>>>>>>> a3034067462b892bf1a935d770a94cc5084d0c62
 
 /**
  * struct fmt - Struct op

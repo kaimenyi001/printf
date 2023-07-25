@@ -9,10 +9,17 @@ void print_buffer(char buffer[], int *buff_ind);
  */
 int _printf(const char *format, ...)
 {
+<<<<<<< HEAD
 	int i, printed = 0, printed_chars = 0;
 	int flags, width, precision, size, buff_ind = 0;
 	va_list list;
 	char buffer[BUFF_SIZE];
+=======
+	int (*fun)(va_list, char *, unsigned int);
+	unsigned int a = 0, len = 0, abuf = 0;
+	va_list argts;
+	char *bffr;
+>>>>>>> a3034067462b892bf1a935d770a94cc5084d0c62
 
 	if (format == NULL)
 		return (-1);
@@ -23,6 +30,7 @@ int _printf(const char *format, ...)
 	{
 		if (format[i] != '%')
 		{
+<<<<<<< HEAD
 			buffer[buff_ind++] = format[i];
 			if (buff_ind == BUFF_SIZE)
 				print_buffer(buffer, &buff_ind);
@@ -63,5 +71,35 @@ void print_buffer(char buffer[], int *buff_ind)
 		write(1, &buffer[0], *buff_ind);
 
 	*buff_ind = 0;
+=======
+			if (format[a + 1] == '\0')
+			{
+				print_buf(bffr, abuf), free(bffr), va_end(argts);
+				return (-1);
+			}
+			else
+			{
+				fun = get_print_func(format, a + 1);
+				if (fun == NULL)
+				{
+					if (format[a + 1] == ' ' && !format[a + 2])
+						return (-1);
+					handl_buf(bffr, format[a], abuf), len++, a--;
+				}
+				else
+				{
+					len += fun(argts, bffr, abuf);
+					a += ev_print_func(format, a + 1);
+				}
+			} a++;
+		}
+		else
+			handl_buf(bffr, format[a], abuf), len++;
+		for (abuf = len; abuf > 1024; abuf -= 1024)
+			;
+	}
+	print_buf(bffr, abuf), free(bffr), va_end(argts);
+	return (len);
+>>>>>>> a3034067462b892bf1a935d770a94cc5084d0c62
 }
 
