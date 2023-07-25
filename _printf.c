@@ -8,11 +8,11 @@
 int _printf(const char *format, ...)
 {
 	int (*fun)(va_list, char *, unsigned int);
-	va_list args;
+	va_list argts;
 	unsigned int abuf = 0, a = 0, ln = 0;
 	char *bffr;
 
-	va_start(args, format), bffr = malloc(sizeof(char) * 1024);
+	va_start(argts, format), bffr = malloc(sizeof(char) * 1024);
 	if (!format || !bffr || (format[a] == '%' && !format[a + 1]))
 		return (-1);
 	if (!format[a])
@@ -37,7 +37,7 @@ int _printf(const char *format, ...)
 				}
 				else
 				{	
-					ln += fun(args, bffr, abuf);
+					ln += fun(argts, bffr, abuf);
 					a += ev_print_func(format, a + 1);
 				}
 			} a++;
@@ -47,6 +47,6 @@ int _printf(const char *format, ...)
 		for (abuf = ln; abuf > 1024; abuf -= 1024)
 			;
 	}
-	print_buf(bffr, abuf), free(bffr), va_end(args);
+	print_buf(bffr, abuf), free(bffr), va_end(argts);
 	return (ln);
 }
