@@ -17,9 +17,9 @@ int _printf(const char *format, ...)
 		return (-1);
 	if (!format[a])
 		return (0);
-	for (a = 0; format && format[a] != '\0'; a++)
+	for (a = 0; format && format[a]; a++)
 	{
-		if (format[i] != '%')
+		if (format[a] == '%')
 		{
 			if (format[a + 1] == '\0')
 			{
