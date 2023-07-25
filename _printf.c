@@ -8,7 +8,7 @@
 int _printf(const char *format, ...)
 {
 	int (*fun)(va_list, char *, unsigned int);
-	unsigned int a = 0, ln = 0, abuf = 0;
+	unsigned int a = 0, len = 0, abuf = 0;
 	va_list argts;
 	char *bffr;
 
@@ -33,20 +33,20 @@ int _printf(const char *format, ...)
 				{
 					if (format[a + 1] == ' ' && !format[a + 2])
 						return (-1);
-					handl_buf(bffr, format[a], abuf), ln++, a--;
+					handl_buf(bffr, format[a], abuf), len++, a--;
 				}
 				else
 				{
-					ln += fun(argts, bffr, abuf);
+					len += fun(argts, bffr, abuf);
 					a += ev_print_func(format, a + 1);
 				}
 			} a++;
 		}
 		else
-			handl_buf(bffr, format[a], abuf), ln++;
-		for (abuf = ln; abuf > 1024; abuf -= 1024)
+			handl_buf(bffr, format[a], abuf), len++;
+		for (abuf = len; abuf > 1024; abuf -= 1024)
 			;
 	}
 	print_buf(bffr, abuf), free(bffr), va_end(argts);
-	return (ln);
+	return (len);
 }
